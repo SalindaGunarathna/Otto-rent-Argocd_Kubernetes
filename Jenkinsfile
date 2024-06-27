@@ -27,7 +27,7 @@ pipeline {
                 sh """
                    echo "Updating deployment.yaml with new image tag..."
                    cat deployment.yaml
-                   sed -i 's|salindadocker/otto-rent-backend:.*|salindadocker/otto-rent-backend:${IMAGE_TAG}|g' deployment.yaml
+                   sed -i 's|salindadocker/otto-rent-backend:.*|salindadocker/otto-rent-backend:22.${env.BUILD_NUMBER+13}|g' deployment.yaml
                    cat deployment.yaml
                 """
             }
@@ -39,7 +39,7 @@ pipeline {
                    git config --global user.name "YourUsername"
                    git config --global user.email "your.email@example.com"
                    git add deployment.yaml
-                   git commit -m "Updated Deployment Manifest with new image tag: ${IMAGE_TAG}"
+                   git commit -m "Updated Deployment Manifest with new image tag: 22.${env.BUILD_NUMBER+13}"
                 """
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                   sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/SalindaGunarathna/Otto-rent-Argocd_Kubernetes main"
