@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: rent-app
-          image: salindadocker/otto-rent-backend:22.15
+          image: salindadocker/otto-rent-backend:22.16
           resources:
             limits:
               memory: "256Mi"
