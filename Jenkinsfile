@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label "jenkins-agent"
-    }
+    agent any
 
     tools {
         jdk 'Java17'
@@ -24,7 +22,7 @@ pipeline {
         stage("Update the Deployment Tags") {
             steps {
                 script {
-                    def newTag = "22.${env.BUILD_NUMBER.toInteger() + 12}"
+                    def newTag = "23.${env.BUILD_NUMBER}"
                     sh """
                         echo "Updating deployment.yaml with new image tag..."
                         cat deployment.yaml
@@ -38,7 +36,7 @@ pipeline {
         stage("Push the changed deployment file to Git") {
             steps {
                 script {
-                    def newTag = "22.${env.BUILD_NUMBER.toInteger() + 12}"
+                    def newTag = "23.${env.BUILD_NUMBER}"
                     sh """
                         git config --global user.name "YourUsername"
                         git config --global user.email "your.email@example.com"
